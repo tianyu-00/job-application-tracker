@@ -54,7 +54,10 @@ function Home() {
   const handleSave = () => {
     setSaved(false);
     saveApplication(data)
-      .then(() => setSaved(true))
+      .then(() => {
+        setSaved(true);
+        setError(null);
+      })
       .catch((err) => setError("Failed to save application."));
   };
 
