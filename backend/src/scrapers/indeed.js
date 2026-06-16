@@ -17,12 +17,16 @@ async function scrapeIndeedJob(url) {
 
   const data = await page.evaluate(() => {
     const getText = (sel) => document.querySelector(sel)?.innerText?.trim() || null;
+    const salaryContainer = document.querySelector("#salaryInfoAndJobType");
+    const salarySpans = salaryContainer?.querySelectorAll("span") || [];
 
     return {
       title: getText("h1"),
       company: getText('[data-testid="inlineHeader-companyName"]'),
       location: getText('[data-testid="inlineHeader-companyLocation"]'),
       description: getText("#jobDescriptionText"),
+      salary: salarySpans[0]?.innerText?.trim() || null,
+      employment_type: salarySpans[1]?.innerText?.replace(/^\s*-\s*/, "")?.trim() || null,
       work_type: (() => {
         const locationEl = document.querySelector('[data-testid="inlineHeader-companyLocation"]');
         const raw = locationEl?.nextElementSibling?.innerText?.trim() || null;
@@ -35,6 +39,7 @@ async function scrapeIndeedJob(url) {
     };
   });
 
+  console.log("SCRAPED DATA:", data);
   await page.close();
   await context.close();
 

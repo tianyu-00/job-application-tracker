@@ -10,19 +10,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { ChevronUp, ChevronDown, ChevronsUpDown, CheckCircle2 } from "lucide-react";
 import { updateApplication } from "../api";
 
-const workTypeBadgeVariant = (workType) => {
-  switch (workType) {
-    case "Remote":
-      return "default";
-    case "Hybrid":
-      return "secondary";
-    case "On-site":
-      return "outline";
-    default:
-      return "outline";
-  }
-};
-
 const statusBadgeVariant = (status) => {
   switch (status) {
     case "Applied":
@@ -49,15 +36,61 @@ function FormField({ label, children }) {
 
 const columns = [
   { accessorKey: "title", header: "Title" },
-  { accessorKey: "company", header: "Company" },
-  { accessorKey: "location", header: "Location" },
+  {
+    accessorKey: "company",
+    header: "Company",
+    cell: (info) => {
+      const val = info.getValue();
+      return val ? (
+        <span className="text-sm text-muted-foreground">{val}</span>
+      ) : (
+        <span className="text-muted-foreground text-sm">—</span>
+      );
+    },
+  },
+  {
+    accessorKey: "location",
+    header: "Location",
+    cell: (info) => {
+      const val = info.getValue();
+      return val ? (
+        <span className="text-sm text-muted-foreground">{val}</span>
+      ) : (
+        <span className="text-muted-foreground text-sm">—</span>
+      );
+    },
+  },
   {
     accessorKey: "work_type",
     header: "Work Type",
     cell: (info) => {
       const val = info.getValue();
       return val ? (
-        <Badge variant={workTypeBadgeVariant(val)}>{val}</Badge>
+        <span className="text-sm text-muted-foreground">{val}</span>
+      ) : (
+        <span className="text-muted-foreground text-sm">—</span>
+      );
+    },
+  },
+  {
+    accessorKey: "employment_type",
+    header: "Type",
+    cell: (info) => {
+      const val = info.getValue();
+      return val ? (
+        <span className="text-sm text-muted-foreground">{val}</span>
+      ) : (
+        <span className="text-muted-foreground text-sm">—</span>
+      );
+    },
+  },
+  {
+    accessorKey: "salary",
+    header: "Salary",
+    cell: (info) => {
+      const val = info.getValue();
+      return val ? (
+        <span className="text-sm text-muted-foreground">{val}</span>
       ) : (
         <span className="text-muted-foreground text-sm">—</span>
       );
@@ -306,6 +339,24 @@ function ApplicationTable({ data, page, totalPages, onPageChange, search, onSear
                     <Input
                       value={editData.url || ""}
                       onChange={(e) => setEditData({ ...editData, url: e.target.value })}
+                    />
+                  </FormField>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField label="Salary">
+                    <Input
+                      value={editData.salary || ""}
+                      onChange={(e) => setEditData({ ...editData, salary: e.target.value })}
+                      placeholder="e.g. £30,000 - £40,000"
+                    />
+                  </FormField>
+
+                  <FormField label="Employment Type">
+                    <Input
+                      value={editData.employment_type || ""}
+                      onChange={(e) => setEditData({ ...editData, employment_type: e.target.value })}
+                      placeholder="e.g. Full-time, Contract"
                     />
                   </FormField>
                 </div>

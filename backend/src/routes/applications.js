@@ -19,13 +19,24 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { url, title, company, location, description, applied_at, work_type } = req.body;
+    const { url, title, company, location, description, applied_at, work_type, salary, employment_type } = req.body;
 
     if (!url) {
       return res.status(400).json({ success: false, error: "Missing url" });
     }
 
-    const saved = await insertApplication({ url, title, company, location, description, applied_at, work_type });
+    const saved = await insertApplication({
+      url,
+      title,
+      company,
+      location,
+      description,
+      applied_at,
+      work_type,
+      salary,
+      employment_type,
+    });
+
     res.json({ success: true, data: saved });
   } catch (err) {
     console.error(err);
@@ -36,7 +47,8 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, company, location, description, work_type, status, applied_at } = req.body;
+
+    const { title, company, location, description, work_type, status, applied_at, salary, employment_type } = req.body;
 
     const updated = await updateApplication(id, {
       title,
@@ -46,12 +58,14 @@ router.put("/:id", async (req, res) => {
       work_type,
       status,
       applied_at,
+      salary,
+      employment_type,
     });
+
     res.json({ success: true, data: updated });
   } catch (err) {
     console.error(err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
-
 export default router;

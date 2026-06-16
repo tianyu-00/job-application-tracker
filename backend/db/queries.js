@@ -7,13 +7,35 @@ export async function insertApplication(data) {
     company = null,
     location = null,
     description = null,
+    salary = null,
+    employment_type = null,
     applied_at = null,
     work_type = null,
   } = data;
 
   const [row] = await sql`
-    INSERT INTO applications (url, title, company, location, description, applied_at, work_type)
-    VALUES (${url}, ${title}, ${company}, ${location}, ${description}, ${applied_at ?? sql`NOW()`}, ${work_type})
+    INSERT INTO applications (
+      url,
+      title,
+      company,
+      location,
+      description,
+      salary,
+      employment_type,
+      applied_at,
+      work_type
+    )
+    VALUES (
+      ${url},
+      ${title},
+      ${company},
+      ${location},
+      ${description},
+      ${salary},
+      ${employment_type},
+      ${applied_at ?? sql`NOW()`},
+      ${work_type}
+    )
     RETURNING *
   `;
 
@@ -51,7 +73,7 @@ export async function getAllApplications({ page = 1, limit = 20, search = "" } =
 }
 
 export async function updateApplication(id, data) {
-  const { title, company, location, description, work_type, status, applied_at } = data;
+  const { title, company, location, description, salary, employment_type, work_type, status, applied_at } = data;
 
   const [row] = await sql`
     UPDATE applications
@@ -60,6 +82,8 @@ export async function updateApplication(id, data) {
       company = ${company},
       location = ${location},
       description = ${description},
+      salary = ${salary},
+      employment_type = ${employment_type},
       work_type = ${work_type},
       status = ${status},
       applied_at = ${applied_at},

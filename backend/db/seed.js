@@ -4,6 +4,7 @@ import postgres from "postgres";
 const sql = postgres(process.env.DATABASE_URL);
 
 const companies = ["Google", "Meta", "Apple", "Amazon", "Microsoft", "Netflix", "Spotify", "Airbnb", "Uber", "Stripe"];
+
 const titles = [
   "Frontend Developer",
   "Backend Engineer",
@@ -16,6 +17,7 @@ const titles = [
   "QA Engineer",
   "Cloud Architect",
 ];
+
 const locations = [
   "London",
   "Manchester",
@@ -28,10 +30,19 @@ const locations = [
   "Cardiff",
   "Remote",
 ];
+
 const statuses = ["Applied", "Interview", "Offer", "Rejected"];
+
+const employmentTypes = ["Full-time", "Part-time", "Contract", "Internship"];
 
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomSalary() {
+  const min = Math.floor(Math.random() * 40 + 30) * 1000; // 30k–70k
+  const max = min + Math.floor(Math.random() * 30 + 5) * 1000;
+  return `${min} - ${max} a year`;
 }
 
 const applications = Array.from({ length: 300 }, (_, i) => ({
@@ -41,12 +52,32 @@ const applications = Array.from({ length: 300 }, (_, i) => ({
   location: random(locations),
   description: `This is a sample job description for job ${i + 1}.`,
   status: random(statuses),
+  salary: randomSalary(),
+  employment_type: random(employmentTypes),
 }));
 
 for (const app of applications) {
   await sql`
-    INSERT INTO applications (url, title, company, location, description, status)
-    VALUES (${app.url}, ${app.title}, ${app.company}, ${app.location}, ${app.description}, ${app.status})
+    INSERT INTO applications (
+      url,
+      title,
+      company,
+      location,
+      description,
+      status,
+      salary,
+      employment_type
+    )
+    VALUES (
+      ${app.url},
+      ${app.title},
+      ${app.company},
+      ${app.location},
+      ${app.description},
+      ${app.status},
+      ${app.salary},
+      ${app.employment_type}
+    )
     ON CONFLICT (url) DO NOTHING
   `;
 }

@@ -14,6 +14,8 @@ const emptyForm = {
   company: "",
   location: "",
   work_type: "",
+  employment_type: "",
+  salary: "",
   description: "",
   url: "",
   applied_at: new Date().toISOString().split("T")[0],
@@ -172,6 +174,24 @@ function Home() {
                   value={data.applied_at || new Date().toISOString().split("T")[0]}
                   onChange={(e) => setData({ ...data, applied_at: e.target.value })}
                   className="w-full"
+                />
+              </FormField>
+
+              <FormField label="Salary">
+                <Input
+                  value={data.salary || ""}
+                  onChange={(e) => setData({ ...data, salary: e.target.value })}
+                  placeholder="e.g. £30,000 - £40,000"
+                />
+              </FormField>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
+              <FormField label="Employment Type">
+                <Input
+                  value={data.employment_type || ""}
+                  onChange={(e) => setData({ ...data, employment_type: e.target.value })}
+                  placeholder="e.g. Full-time, Contract, Permanent, Hybrid..."
                 />
               </FormField>
             </div>

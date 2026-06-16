@@ -27,7 +27,7 @@ function Applications() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="mx-auto px-4 py-10">
       <div className="mb-8">
         <h1 className="text-2xl font-semibold tracking-tight">Applications</h1>
         <p className="text-sm text-muted-foreground mt-1">Track and manage your job applications.</p>
