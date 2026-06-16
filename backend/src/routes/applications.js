@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllApplications, insertApplication, updateApplication } from "../../db/queries.js";
+import { getAllApplications, insertApplication, updateApplication, deleteApplication } from "../../db/queries.js";
 
 const router = express.Router();
 
@@ -68,4 +68,18 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await deleteApplication(id);
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 export default router;

@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { ChevronUp, ChevronDown, ChevronsUpDown, CheckCircle2 } from "lucide-react";
-import { updateApplication } from "../api";
+import { updateApplication, deleteApplication } from "../api";
 
 const statusBadgeVariant = (status) => {
   switch (status) {
@@ -162,6 +162,19 @@ function ApplicationTable({ data, page, totalPages, onPageChange, search, onSear
         onUpdate();
       })
       .catch(console.error);
+  };
+
+  const handleDelete = async () => {
+    if (!editData?.id) return;
+
+    try {
+      await deleteApplication(editData.id);
+      setSelected(null);
+      setEditData(null);
+      onUpdate(); // refresh table
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const table = useReactTable({
@@ -378,6 +391,11 @@ function ApplicationTable({ data, page, totalPages, onPageChange, search, onSear
                       Saved successfully!
                     </div>
                   )}
+
+                  <Button variant="destructive" onClick={handleDelete}>
+                    Delete
+                  </Button>
+
                   <Button onClick={handleSave} className="ml-auto">
                     Save Changes
                   </Button>

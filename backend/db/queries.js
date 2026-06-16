@@ -94,3 +94,13 @@ export async function updateApplication(id, data) {
 
   return row;
 }
+
+export async function deleteApplication(id) {
+  const [row] = await sql`
+    DELETE FROM applications
+    WHERE id = ${id}
+    RETURNING *
+  `;
+
+  return row;
+}

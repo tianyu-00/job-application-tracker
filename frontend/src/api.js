@@ -22,4 +22,8 @@ export const updateApplication = (id, data) => {
   return api.put(`/applications/${id}`, data);
 };
 
+export const deleteApplication = (id) => {
+  return api.delete(`/applications/${id}`);
+};
+
 export default api;
