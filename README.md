@@ -5,7 +5,7 @@ A full-stack job application tracking platform built with React, Vite, Node.js, 
 
 [![madewithlove](https://img.shields.io/badge/made_with-❤-red?style=for-the-badge&labelColor=orange)](https://github.com/Tianyu-00)
 
-[Backend]() | [Frontend]()
+[Backend](https://github.com/tianyu-00/job-application-tracker/edit/main/README.md#backend) | [Frontend](https://github.com/tianyu-00/job-application-tracker/edit/main/README.md#frontend)
 
 ![gif](https://github.com/user-attachments/assets/7c9337bc-e517-4949-acc1-1e93d72e38b1)
 
