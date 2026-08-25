@@ -34,3 +34,13 @@ cd frontend
 npm install
 npm run dev
 ```
+
+## Docs / Credits To
+
+- [Playwright](https://playwright.dev/docs/intro)
+- [Playwright Navigations](https://playwright.dev/docs/navigations)
+- [Playwright Locators](https://playwright.dev/docs/locators)
+- [Playwright Actionability](https://playwright.dev/docs/actionability)
+- [Playwright Evaluating](https://playwright.dev/docs/evaluating)
+- [Playwright Debugging](https://playwright.dev/docs/debug)
+- [shadcn/ui + Vite](https://ui.shadcn.com/docs/installation/vite)
