@@ -1,48 +1,54 @@
 # Job Application Tracker
 
-This application is used to track job applications
+A full-stack job application tracking platform built with React, Vite, Node.js, Express, Playwright, and PostgreSQL. The goal is to simplify the job search process by allowing users to submit job URLs and automatically extract useful job information.
 
-# Features
+## Features
 
-### Frontend:
+### Frontend
 
-### Backend:
+- [x] Submit job URL
+- [x] Display scraped job information
+- [x] Manage saved jobs
 
-- Scrape The Web [ ]
-- Get Job Information [ ]
+### Backend
 
-### Thought process
+- [x] Scrape job websites
+- [x] Get job information
+- [x] Store jobs in database
+- [ ] Export database to spreadsheet
+
+### Job Information
+
+For now, we'll collect:
+
+- Job title
+- Company
+- Location
+- Description
+
+More information will be added later.
+
+## Thought Process
 
 - Frontend sends job URL
 - Express receives request
 - Route validates input
 - Controller decides scraper type
-- Registry picks correct scraper (I will use indeed as an example for now, will add others later on)
-- Playwright opens browser
-- Scrapes job page (This is going to be the hard part im guessing, as some are more dynamic)
+- Scraper registry selects the correct scraper
+- Playwright opens the browser
+- Scraper extracts the job information
 - Returns structured JSON
 - API responds to frontend
+- Store the data in the database
 
-Some infos i want are:
+Indeed will be the first supported website, with other job boards added later.
 
-- Job title
-- Company
-- Location
-- Description (Not that important, but its not bad to have)
+## Docs
 
-Well only get these info for now, well expand on it later on.
-
-We will also need a database later on to store these colleted info.
-
-Another nice thing to have is to convert the database to spreadsheet, so we could make a copy of it to be more portable.
-
-### Docs
-
-https://playwright.dev/docs/intro
-https://playwright.dev/docs/navigations
-https://playwright.dev/docs/locators
-https://playwright.dev/docs/actionability
-https://playwright.dev/docs/evaluating
-https://playwright.dev/docs/debug
-https://ui.shadcn.com/docs/installation/vite
-https://ui.shadcn.com/create?template=vite&base=base
+- [Playwright](https://playwright.dev/docs/intro)
+- [Playwright Navigations](https://playwright.dev/docs/navigations)
+- [Playwright Locators](https://playwright.dev/docs/locators)
+- [Playwright Actionability](https://playwright.dev/docs/actionability)
+- [Playwright Evaluating](https://playwright.dev/docs/evaluating)
+- [Playwright Debugging](https://playwright.dev/docs/debug)
+- [shadcn/ui + Vite](https://ui.shadcn.com/docs/installation/vite)
