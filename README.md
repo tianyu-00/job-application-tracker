@@ -7,6 +7,30 @@ A full-stack job application tracking platform built with React, Vite, Node.js, 
 
 [Backend]() | [Frontend]()
 
-![gif]()
+![gif](https://github.com/user-attachments/assets/7c9337bc-e517-4949-acc1-1e93d72e38b1)
 
 </div>
+
+## Getting Started
+
+
+## Backend
+
+``` env
+DATABASE_URL=postgresql://USERNAME:PASSWORD@IP:PORT/DATABASE_NAME
+```
+
+``` bash
+cd backend
+npm install
+npm run db:init
+npm run db:seed
+```
+
+
+## Frontend
+``` bash
+cd frontend
+npm install
+npm run dev
+```
